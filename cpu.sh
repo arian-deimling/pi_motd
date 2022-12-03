@@ -1,6 +1,9 @@
 #!/usr/bin/bash
 
-cpu=$(awk -F':' '/^model name/ {split($2, A, " @"); print A[1]; exit}' /proc/cpuinfo)
+# arian
+cpu=$(grep -m1 -E 'model name\s+:' /proc/cpuinfo | sed 's/model name[[:space:]]\+:[[:space:]]\+//g')
+
+
 cpu=$(echo "$cpu" | sed 's/Processor //g')
 cpun=$(grep -c '^processor' /proc/cpuinfo)
 
